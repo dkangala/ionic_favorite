@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 
 import {Quote} from "../../data/quote.interface";
 
+import { QuotesService } from "../../services/quotes"
+
 /**
  * Generated class for the QuotesPage page.
  *
@@ -20,7 +22,8 @@ export class QuotesPage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private quotesService: QuotesService) {
   }
 
   ionViewDidLoad() {
@@ -41,7 +44,7 @@ export class QuotesPage implements OnInit {
         {
           text: 'Yes, go ahead',
           handler: () => {
-            console.log('Ok');
+            this.quotesService.addQuoteToFavorites(selectedQuote);
           }
         },
         {
@@ -55,5 +58,13 @@ export class QuotesPage implements OnInit {
     });
 
     alert.present();
+  }
+
+  onRemoveToFavorite(quote: Quote) {
+    return this.quotesService.removeQuoteToFavorites(quote);
+  }
+
+  isFavorite(quote: Quote) {
+    return this.quotesService.isQuoteFavorite(quote);
   }
 }
