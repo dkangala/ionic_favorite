@@ -12,8 +12,6 @@ import { SettingsPage } from '../settings/settings';
   template: `
     <ion-tabs selectedIndex="3">
       <ion-tab [root]="favoritesPage" tabTitle="Favorites" tabIcon="star"></ion-tab>
-      <ion-tab [root]="settingsPage" tabTitle="Settings" tabIcon="star"></ion-tab>
-      <ion-tab [root]="quotePage" tabTitle="Quote" tabIcon="book"></ion-tab>
       <ion-tab [root]="libraryPage" tabTitle="Library" tabIcon="book"></ion-tab>
     </ion-tabs>
   `

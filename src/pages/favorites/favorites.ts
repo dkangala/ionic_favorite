@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController,MenuController } from 'ionic-angular';
 
 import { Quote } from '../../data/quote.interface';
 import { QuotesService } from "../../services/quotes";
 import { QuotePage } from "../quote/quote";
+import { SettingsService } from "../../services/settings"
+
 
 /**
  * Generated class for the FavoritesPage page.
@@ -23,7 +25,9 @@ export class FavoritesPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private quotesService: QuotesService,
-    private modelCtrl: ModalController) {
+    private modelCtrl: ModalController,
+    private menuController: MenuController,
+    private settingsService: SettingsService) {
   }
 
   ionViewWillEnter() {
@@ -39,13 +43,35 @@ export class FavoritesPage {
     modal.present();
     modal.onDidDismiss((remove:boolean) => {
       if (remove) {
-        this.quotesService.removeQuoteToFavorites(quote);
-        const position = this.quotes.findIndex((quoteEl: Quote) => {
-          return quoteEl.id == quote.id;
-        })
-        this.quotes.splice(position, 1);
+        this.onRemoveFromFavorites(quote);
+        // this.quotesService.removeQuoteToFavorites(quote);
+        // const position = this.quotes.findIndex((quoteEl: Quote) => {
+        //   return quoteEl.id == quote.id;
+        // })
+        // this.quotes.splice(position, 1);
       }
     });
   }
 
+  onRemoveFromFavorites(quote: Quote) {
+    this.quotesService.removeQuoteToFavorites(quote);
+    const position = this.quotes.findIndex((quoteEl: Quote) => {
+      return quoteEl.id == quote.id;
+    })
+    this.quotes.splice(position, 1);
+  }
+
+  onOpenMenu() {
+    this.menuController.open();
+  }
+
+  getBackground() {
+    //return this.settingsService.isAltBackground() ? 'altQuoteBackground':'quoteBackground';
+    //return "altQuoteBackground";
+    return this.settingsService.isAltBackground()? 'altQuoteBackground':'quoteBackground';
+  }
+
+  isAltBackground() {
+    return this.settingsService.isAltBackground();
+  }
 }

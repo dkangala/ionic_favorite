@@ -14,6 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TabsmenuPage } from '../pages/tabsmenu/tabsmenu';
 
 import { QuotesService } from "../services/quotes"
+import { SettingsService } from "../services/settings"
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { QuotesService } from "../services/quotes"
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SettingsService,
     QuotesService
   ]
 })

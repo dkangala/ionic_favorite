@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
-import {Quote} from "../../data/quote.interface";
+import { Quote } from "../../data/quote.interface";
 
 import { QuotesService } from "../../services/quotes"
 
